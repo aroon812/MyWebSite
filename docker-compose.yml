@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+    backend:
+        build: ./backend
+        command: dotnet backend.dll
+        ports:
+            - "5001:80"
