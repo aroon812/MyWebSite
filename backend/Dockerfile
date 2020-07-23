@@ -1,25 +1,17 @@
-#pull down .NET image from docker
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-
-
-
-
-
+FROM ruby:2.5
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN mkdir /backend
 WORKDIR /backend
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+RUN bundle install
 COPY . /backend
 
-#Install dependencies
-RUN dotnet restore "./backend.csproj"
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3001
 
-#Compile and prep for deployment.
-RUN dotnet publish "backend.csproj" -c Release -o /app/publish
-
-#Pull down docker hub image that includes only the ASP.NET Core runtime.
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim
-
-EXPOSE 80
-
-#Copy published app to this container.
-COPY --from=build /app/publish .
-
-#ENTRYPOINT ["dotnet", "backend.dll"]
+# Start the main process.
+CMD ["rails", "server", "-b", "0.0.0.0"]
