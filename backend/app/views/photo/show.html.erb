@@ -1,0 +1,10 @@
+<h1><%= @photo.title %></h1>
+
+<p>
+   <strong>Project: </strong> <%= @photo.project_id %><br />
+   <strong>Description: </strong> <%= @photo.description %><br />
+</p>
+
+<hr />
+
+<%= link_to 'Back', {:action => 'list'} %>

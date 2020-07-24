@@ -1,0 +1,12 @@
+<h1>Add new photo</h1>
+
+<%= form_tag :action => 'create' do %>
+<p><label for = "photo_project_id">ProjectID</label>:
+
+<%= text_field 'photos', 'project_id', :value => @project_id %></p>
+<p><label for = "photo_description">Description</label>:
+
+<%= text_area 'photos', 'description' %></p>
+<%= submit_tag "Create" %>
+<% end -%>
+<%= link_to 'Back', {:action => 'list'} %>

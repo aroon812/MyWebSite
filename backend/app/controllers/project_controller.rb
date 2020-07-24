@@ -47,8 +47,4 @@ class ProjectController < ApplicationController
         Project.find(params[:id]).destroy
         redirect_to :action => 'list'
     end
-
-    def show_photos
-        @photo = Photo.find(params[:id])
-    end
 end

@@ -9,15 +9,21 @@ class PhotoController < ApplicationController
 
     def new
         @photo = Photo.new
+        @project_id = params[:project_id]
     end
 
     def create
         @photo = Photo.new(photo_params)
-        puts @photo.title
+        
+        puts @photo.project_id
         puts @photo.description
+        @photo.validate!
+        puts @photo.errors.full_messages
+
         if @photo.save 
             redirect_to :action => 'list'
         else
+            
             render :action => 'new'
         end
     end
@@ -43,6 +49,7 @@ class PhotoController < ApplicationController
     def photo_param 
         params.require(:photo).permit(:project_id, :description)
     end
+
 
     def delete
         Photo.find(params[:id]).destroy
