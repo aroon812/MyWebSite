@@ -1,3 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+   get 'project/list'
+   get 'project/new'
+   post 'project/create'
+   patch 'project/update'
+   get 'project/show'
+   get 'project/edit'
+   get 'project/delete'
+
+   get 'photo/list'
+   get 'photo/new'
+   post 'photo/create'
+   patch 'photo/update'
+   get 'photo/show'
+   get 'photo/edit'
+   get 'photo/delete'
+   
+   
 end

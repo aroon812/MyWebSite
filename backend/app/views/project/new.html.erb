@@ -1,0 +1,12 @@
+<h1>Add new project</h1>
+
+<%= form_tag :action => 'create' do %>
+<p><label for = "project_title">Title</label>:
+
+<%= text_field 'projects', 'title' %></p>
+<p><label for = "project_description">Description</label>:
+
+<%= text_area 'projects', 'description' %></p>
+<%= submit_tag "Create" %>
+<% end -%>
+<%= link_to 'Back', {:action => 'list'} %>
