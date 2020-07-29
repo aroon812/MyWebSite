@@ -21,15 +21,11 @@ class PhotoController < ApplicationController
         puts @photo.errors.full_messages
 
         if @photo.save 
-            redirect_to :action => 'list'
+            redirect_to :action => 'show', :controller => 'project', :id => @photo.project_id
         else
             
             render :action => 'new'
         end
-    end
-
-    def photo_params
-        params.require(:photos).permit(:project_id, :description)
     end
 
     def edit
@@ -39,20 +35,21 @@ class PhotoController < ApplicationController
     def update
         @photo = Photo.find(params[:id])
 
-        if @photo.update_attributes(photo_param)
+        if @photo.update_attributes(photo_params)
             redirect_to :action => 'show', :id => @photo
         else
             render :action => 'edit'
         end
     end
 
-    def photo_param 
-        params.require(:photo).permit(:project_id, :description)
+    def photo_params
+        params.require(:photo).permit(:project_id, :description, :file)
     end
-
-
+    
     def delete
-        Photo.find(params[:id]).destroy
-        redirect_to :action => 'list'
+        photo = Photo.find(params[:id])
+        project_id = photo.project_id
+        photo.destroy()
+        redirect_to :action => 'show', :controller => 'project', :id => project_id
     end
 end

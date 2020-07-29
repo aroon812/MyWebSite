@@ -1,12 +1,13 @@
-<h1>Edit Project Detail</h1>
+<h1>Edit Photo</h1>
 
 <%= form_for @photo, :url =>{:action => "update", :id =>@photo} do |f| %>
 
-<p>Title: <%= f.text_field 'project_id' %></p>
+<p>Project ID: <%= f.text_field 'project_id' %></p>
 <p>Description<br/>
 
 <%= f.text_area 'description' %></p>
+<%= f.file_field 'file'%>
 <%= f.submit "Save changes" %>
 <% end %>
 
-<%= link_to 'Back', {:action => 'list' } %>
+<%= link_to 'Back', {:action => 'show', :controller => 'project', :id => @photo.project_id} %>

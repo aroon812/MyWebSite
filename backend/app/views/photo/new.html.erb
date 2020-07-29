@@ -1,12 +1,15 @@
 <h1>Add new photo</h1>
 
-<%= form_tag :action => 'create' do %>
+<%= form_for(Photo.new, url: photo_create_url, :html => { :multipart => true }) do |f| %>
 <p><label for = "photo_project_id">ProjectID</label>:
 
-<%= text_field 'photos', 'project_id', :value => @project_id %></p>
+<%= f.text_field :project_id, value: @project_id%></p>
 <p><label for = "photo_description">Description</label>:
 
-<%= text_area 'photos', 'description' %></p>
+<%= f.text_area :description %></p>
+
+<%= f.file_field :file %>
+
 <%= submit_tag "Create" %>
 <% end -%>
-<%= link_to 'Back', {:action => 'list'} %>
+<%= link_to 'Back', {:action => 'show', :controller => 'project', :id => @project_id} %>

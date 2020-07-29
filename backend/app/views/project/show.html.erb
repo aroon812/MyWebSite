@@ -4,6 +4,16 @@
    <strong>ID: </strong> <%= @project.id %><br />
    <strong>Description: </strong> <%= @project.description %><br />
 </p>
+<% @photos.each do |c| %>
+   <%= image_tag(url_for(c.file), size: "200x100") %> 
+   <%= c.description%>
+   <br />
+   <%= link_to 'Edit', {:action => "edit", :controller =>"photo", :id => c.id} %>
+   <%= link_to 'Delete', {:action => "delete", :controller =>"photo", :id => c.id} %>
+   <br />
+<% end %>
+<br />
+<b> <%= link_to 'Add Photo', {:action => "new", :controller =>"photo", :project_id => @project.id} %></b>
 
 <hr />
 

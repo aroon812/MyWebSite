@@ -5,6 +5,7 @@ class ProjectController < ApplicationController
 
     def show
         @project = Project.find(params[:id])
+        @photos = Photo.where(project_id: params[:id])
     end
 
     def new
@@ -16,7 +17,6 @@ class ProjectController < ApplicationController
         if @project.save 
             redirect_to :action => 'list'
         else
-            puts 'hello'
             render :action => 'new'
         end
     end

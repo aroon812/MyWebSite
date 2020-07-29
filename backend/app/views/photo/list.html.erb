@@ -9,7 +9,10 @@
     <%= link_to c.id, {:action => "show", :id => c.id} -%>
     <b> <%= link_to 'Edit', {:action => "edit",:id => c.id} %></b>
     <b> <%= link_to "Delete", {:action => 'delete', :id => c.id},
-      :confirm => "Are you sure you want to delete this item?" %></b>
+      :confirm => "Are you sure you want to delete this item?" %></b> <br>
+    <% if c.file.attached? %>
+      <%= image_tag(url_for(c.file), size: "200x100") %>
+    <% end %>
     
  </li>
    <% end %>

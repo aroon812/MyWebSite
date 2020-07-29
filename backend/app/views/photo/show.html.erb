@@ -1,8 +1,9 @@
-<h1><%= @photo.title %></h1>
-
 <p>
    <strong>Project: </strong> <%= @photo.project_id %><br />
    <strong>Description: </strong> <%= @photo.description %><br />
+   <% if @photo.file.attached? %>
+      <%= image_tag(url_for(@photo.file), size: "200x100") %> 
+    <% end %>
 </p>
 
 <hr />
